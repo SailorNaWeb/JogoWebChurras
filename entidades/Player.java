@@ -9,7 +9,7 @@ public class Player extends Entidade{
     public Player() {
 	x = 5;
 	y = 5;
-	width = 100;
+	width = 80;
 	height = 100;
     }
 
@@ -27,5 +27,15 @@ public class Player extends Entidade{
 	if (inputs.direita) {
 	    x += speed;
 	}
+    }
+
+    @Override
+    public void intersected (Actions action) {
+	
+    }
+
+    @Override
+    public Actions intersected () {
+	return Actions.HIT;
     }
 }
