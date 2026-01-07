@@ -12,58 +12,49 @@ import entidades.Player;
 import inputs.Inputs;
 
 public class StatePrincipal extends JPanel implements Runnable{
-	Thread thread;
-	Player player;
-	Inputs inputs;
+    Thread thread;
+    Player player;
+    Inputs inputs;
 
-	public StatePrincipal() {
-		this.setPreferredSize( new Dimension(1280, 720));
-		thread = new Thread(this);
-		player = new Player();
-		inputs = new Inputs();
+    public StatePrincipal() {
+	this.setPreferredSize( new Dimension(1280, 720));
+	thread = new Thread(this);
+	player = new Player();
+	inputs = new Inputs();
 
-		this.addKeyListener(inputs);
-		this.setFocusable(true);
+	this.addKeyListener(inputs);
+	this.setFocusable(true);
 
-		this.requestFocusInWindow();
+	this.requestFocusInWindow();
 
 
-		thread.start();
+	thread.start();
+    }
+
+    @Override
+    public void run () {
+	while (true) {
+	    repaint();
+	    
+	    player.update(inputs);
+
+	    try {
+		Thread.sleep(10);
+	    } catch (Exception e) {
+		    
+	    }
 	}
+    }
 
-	@Override
-	public void run () {
-		while (true) {
-			repaint();
-			
-			if (inputs.cima) {
-				System.out.print("Cima");
-				player.y--;
-			}
-			if (inputs.baixo) {
-				player.y++;
-			}
-			if (inputs.esquerda) {
-				player.x--;
-			}
-			if (inputs.direita) {
-				player.x++;
-			}
-			try {
-				Thread.sleep(10);
-			} catch (Exception e) {
-				
-			}
-		}
-	}
+    @Override
+    public void paintComponent(Graphics g) {
+	super.paintComponent(g);
 
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
+	Graphics2D g2 = (Graphics2D) g;
 
-		Graphics2D g2 = (Graphics2D) g;
+	int[] playerInfos = player.getInfos();
 
-		g2.setColor(new Color(50, 50, 80));
-		g2.fillRect(player.x, player.y, player.width, player.height);
-	}
+	g2.setColor(new Color(50, 50, 80));
+	g2.fillRect(playerInfos[Player.X], playerInfos[Player.Y], playerInfos[Player.WIDTH], playerInfos[Player.HEIGHT]);
+    }
 }
