@@ -1,3 +1,5 @@
+package entidades;
+
 public class Player {
 	public int x = 5;
 	public int y = 5;

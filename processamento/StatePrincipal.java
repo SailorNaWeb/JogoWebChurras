@@ -1,3 +1,5 @@
+package processamento;
+
 import javax.swing.JPanel;
 import java.lang.Runnable;
 import java.awt.Dimension;
@@ -5,6 +7,9 @@ import java.lang.Thread;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+
+import entidades.Player;
+import inputs.Inputs;
 
 public class StatePrincipal extends JPanel implements Runnable{
 	Thread thread;
