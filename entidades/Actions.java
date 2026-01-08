@@ -3,5 +3,6 @@ package entidades;
 public enum Actions {
     HIT,
     GET,
-    STOP
+    STOP,
+    PLAYER
 }

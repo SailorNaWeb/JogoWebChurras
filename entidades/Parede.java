@@ -12,17 +12,22 @@ public class Parede extends Entidade {
     }
 
     @Override
-    public void update(Inputs inputs) {
+    public void update(Inputs inputs, Entidade[] entidades) {
 
     }
 
     @Override
-    public void intersected (Actions action) {
+    public void intersected (Actions action, Entidade entidade) {
 	
     }
 
     @Override
     public Actions intersected () {
 	return Actions.STOP;
+    }
+
+    @Override
+    public void removeIntersected (Entidade entidade) {
+
     }
 }

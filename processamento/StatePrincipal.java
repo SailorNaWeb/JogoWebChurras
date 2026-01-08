@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
+import entidades.Entidade;
+import entidades.Parede;
 import entidades.Player;
 import inputs.Inputs;
 
@@ -15,6 +17,10 @@ public class StatePrincipal extends JPanel implements Runnable{
     Thread thread;
     Player player;
     Inputs inputs;
+
+    Parede parede = new Parede(200, 300, 400, 30);
+
+    Entidade[] entidades = {parede};
 
     public StatePrincipal() {
 	this.setPreferredSize( new Dimension(1280, 720));
@@ -36,7 +42,7 @@ public class StatePrincipal extends JPanel implements Runnable{
 	while (true) {
 	    repaint();
 	    
-	    player.update(inputs);
+	    player.update(inputs, entidades);
 
 	    try {
 		Thread.sleep(10);
@@ -55,6 +61,15 @@ public class StatePrincipal extends JPanel implements Runnable{
 	int[] playerInfos = player.getInfos();
 
 	g2.setColor(new Color(50, 50, 80));
-	g2.fillRect(playerInfos[Player.X], playerInfos[Player.Y], playerInfos[Player.WIDTH], playerInfos[Player.HEIGHT]);
+	g2.fillRect(playerInfos[Entidade.X], playerInfos[Entidade.Y], playerInfos[Entidade.WIDTH], playerInfos[Entidade.HEIGHT]);
+
+	for (Entidade entidade : entidades) {
+	    int[] infos = entidade.getInfos();
+
+	    g2.setColor(new Color(50, 10, 80));
+	    g2.fillRect(infos[Entidade.X], infos[Entidade.Y], infos[Entidade.WIDTH], infos[Entidade.HEIGHT]);
+
+   
+	}
     }
 }
