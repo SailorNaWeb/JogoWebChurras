@@ -46,7 +46,10 @@ public class Player extends Entidade{
 	switch (action) {
 	    case STOP :
 		int[] dados = entidade.getInfos();
-		double[] pontoC = {dados[Entidade.WIDTH] / 2 + dados[Entidade.X], dados[Entidade.HEIGHT] / 2 + dados[Entidade.Y]}; 
+		double[] pontoC = {dados[Entidade.WIDTH] / 2 + dados[Entidade.X], dados[Entidade.HEIGHT] / 2 + dados[Entidade.Y]};
+
+		double x = this.x;
+		double y = this.y;
 
 		boolean[] pontosVer = verifyPoints(dados);	
 
@@ -54,6 +57,8 @@ public class Player extends Entidade{
 
 		    if (pontosVer[Entidade.PONTO_1]) {
 			cima = false;
+			intersected.put(entidade, CIMA);
+			return;
 		    }
 
 		    double[] entPonto = {dados[Entidade.X] + dados[Entidade.WIDTH], dados[Entidade.Y] + dados[Entidade.HEIGHT]};
@@ -83,6 +88,12 @@ public class Player extends Entidade{
 			intersected.put(entidade, DIREITA);
 		    }
 		}  else if (pontosVer[Entidade.PONTO_2]) {
+
+		    if (pontosVer[Entidade.PONTO_3]) {
+			baixo = false;
+			intersected.put(entidade, BAIXO);
+			return;
+		    }
 
 		    double[] entPonto = {dados[Entidade.X] + dados[Entidade.WIDTH], dados[Entidade.Y]};
 		    double[] plaPonto = {x, y + height};
@@ -153,6 +164,27 @@ public class Player extends Entidade{
 	double plaRelativeX = plaPonto[Entidade.X] - pontoC[Entidade.X];
 	double plaRelativeY = plaPonto[Entidade.Y] - pontoC[Entidade.Y];
 
+	if ((plaRelativeX > 0 && entRelativeX < 0) || (plaRelativeX < 0 && entRelativeX > 0)) {
+	    return true;
+	} else if ((plaRelativeY > 0 && entRelativeY < 0) || (plaRelativeY < 0 && entRelativeY > 0)) {
+	    return false;
+	}
+
+	entRelativeX = entRelativeX < 0 ? entRelativeX * -1 : entRelativeX;
+	entRelativeY = entRelativeY < 0 ? entRelativeY * -1 : entRelativeY;
+
+	plaRelativeX = (plaRelativeX < 0 ? plaRelativeX * -1 : plaRelativeX) + speed;
+	plaRelativeY = (plaRelativeY < 0 ? plaRelativeY * -1 : plaRelativeY) + speed;
 	
+	double tanEnt = entRelativeY / entRelativeX;
+	double tanPla = plaRelativeY / plaRelativeX;
+
+	System.out.println("TanEnt: " + tanEnt + " TanPla: " + tanPla);
+	System.out.println("PlaX: " + plaRelativeX + " PlaY: " + plaRelativeY);
+
+	if (tanEnt > tanPla)
+	    return false;
+
+	return true;
     }
 }

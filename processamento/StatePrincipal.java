@@ -18,7 +18,7 @@ public class StatePrincipal extends JPanel implements Runnable{
     Player player;
     Inputs inputs;
 
-    Parede parede = new Parede(200, 300, 400, 30);
+    Parede parede = new Parede(200, 300, 400, 70);
 
     Entidade[] entidades = {parede};
 
