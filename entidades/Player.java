@@ -53,6 +53,24 @@ public class Player extends Entidade{
 
 		boolean[] pontosVer = verifyPoints(dados);	
 
+		if (pontosVer[Entidade.ARES_CIMA]) {
+		    cima = false;
+		    intersected.put(entidade, CIMA);
+		    return;
+		} else if (pontosVer[Entidade.ARES_DIREITA]) {
+		    direita = false;
+		    intersected.put(entidade, DIREITA);
+		    return;
+		} else if (pontosVer[Entidade.ARES_BAIXO]) {
+		    baixo = false;
+		    intersected.put(entidade, BAIXO);
+		    return;
+		} else if (pontosVer[Entidade.ARES_ESQUERDA]) {
+		    esquerda = false;
+		    intersected.put(entidade, ESQUERDA);
+		    return;
+		}
+
 		if (pontosVer[Entidade.PONTO_0]) {
 
 		    if (pontosVer[Entidade.PONTO_1]) {

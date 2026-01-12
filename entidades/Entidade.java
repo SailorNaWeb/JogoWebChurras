@@ -15,6 +15,11 @@ public abstract class Entidade {
     public static final int PONTO_2 = 2;
     public static final int PONTO_3 = 3;
 
+    public static final int ARES_CIMA = 4;
+    public static final int ARES_DIREITA = 5;
+    public static final int ARES_BAIXO = 6;
+    public static final int ARES_ESQUERDA = 7;
+
     int x;
     int y;
     int width;
@@ -40,7 +45,7 @@ public abstract class Entidade {
 	    
 	    boolean[] pontosVer = verifyPoints(dados);
 
-	    if (pontosVer[PONTO_0] || pontosVer[PONTO_1] || pontosVer[PONTO_2] || pontosVer[PONTO_3]) {
+	    if (pontosVer[PONTO_0] || pontosVer[PONTO_1] || pontosVer[PONTO_2] || pontosVer[PONTO_3] || pontosVer[ARES_CIMA] || pontosVer[ARES_DIREITA] || pontosVer[ARES_BAIXO] || pontosVer[ARES_ESQUERDA]) {
 		
 		if (!intersected.containsKey(entidade)) {
 		    Actions acao = entidade.intersected();
@@ -60,7 +65,12 @@ public abstract class Entidade {
 	boolean interPonto2 = ( x > dados[X] && x < (dados[X] + dados[WIDTH]) ) && ( (y + height) > dados[Y] && (y + height) < (dados[Y] + dados[HEIGHT]) );
 	boolean interPonto3 = ( (x + width) > dados[X] && (x + width) < (dados[X] + dados[WIDTH]) ) && ( (y + height) > dados[Y] && (y + height) < (dados[Y] + dados[HEIGHT]) );
 
-	boolean[] result = {interPonto0, interPonto1, interPonto2, interPonto3};
+	boolean arestaCim = y < (dados[Y] + dados[HEIGHT]) && y > dados[Y] && x < dados[X] && (x + width) > (dados[X] + dados[WIDTH]);
+	boolean arestaDir = (x + width) > dados[X] && (x + width) < (dados[X] + dados[WIDTH]) && y < dados[Y] && (y + height) > (dados[Y] + dados[HEIGHT]);
+	boolean arestaBai = (y + height) > dados[Y] && (y + height) < (dados[Y] + dados[HEIGHT]) && x < dados[X] && (x + width) > (dados[X] + dados[WIDTH]);
+	boolean arestaEsq = x < (dados[X] + dados[WIDTH]) && x > dados[X] && y < dados[Y] && (y + height) > (dados[Y] + dados[HEIGHT]);
+
+	boolean[] result = {interPonto0, interPonto1, interPonto2, interPonto3, arestaCim, arestaDir, arestaBai, arestaEsq};
 
 	return result;
     }
