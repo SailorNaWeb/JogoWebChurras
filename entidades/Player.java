@@ -48,26 +48,27 @@ public class Player extends Entidade{
 		int[] dados = entidade.getInfos();
 		double[] pontoC = {dados[Entidade.WIDTH] / 2 + dados[Entidade.X], dados[Entidade.HEIGHT] / 2 + dados[Entidade.Y]};
 
-		double x = this.x;
-		double y = this.y;
-
 		boolean[] pontosVer = verifyPoints(dados);	
 
 		if (pontosVer[Entidade.ARES_CIMA]) {
 		    cima = false;
 		    intersected.put(entidade, CIMA);
+		    y = dados[Entidade.Y] + dados[Entidade.HEIGHT];
 		    return;
 		} else if (pontosVer[Entidade.ARES_DIREITA]) {
 		    direita = false;
 		    intersected.put(entidade, DIREITA);
+		    x = dados[Entidade.X] - width;
 		    return;
 		} else if (pontosVer[Entidade.ARES_BAIXO]) {
 		    baixo = false;
 		    intersected.put(entidade, BAIXO);
+		    y = dados[Entidade.Y] - height;
 		    return;
 		} else if (pontosVer[Entidade.ARES_ESQUERDA]) {
 		    esquerda = false;
 		    intersected.put(entidade, ESQUERDA);
+		    x = dados[Entidade.X] + dados[Entidade.WIDTH];
 		    return;
 		}
 
@@ -76,6 +77,7 @@ public class Player extends Entidade{
 		    if (pontosVer[Entidade.PONTO_1]) {
 			cima = false;
 			intersected.put(entidade, CIMA);
+			y = dados[Entidade.Y] + dados[Entidade.HEIGHT];
 			return;
 		    }
 
@@ -87,9 +89,11 @@ public class Player extends Entidade{
 		    if (isVertical) {
 			cima = false;
 			intersected.put(entidade, CIMA);
+			y = dados[Entidade.Y] + dados[Entidade.HEIGHT];
 		    } else {
 			esquerda = false;
 			intersected.put(entidade, ESQUERDA);
+			x = dados[Entidade.X] + dados[Entidade.WIDTH];
 		    }
 		} else if (pontosVer[Entidade.PONTO_1]) {
 
@@ -101,15 +105,18 @@ public class Player extends Entidade{
 		    if (isVertical) {
 			cima = false;
 			intersected.put(entidade, CIMA);
+			y = dados[Entidade.Y] + dados[Entidade.HEIGHT];
 		    } else {
 			direita = false;
 			intersected.put(entidade, DIREITA);
+			x = dados[Entidade.X] - width;
 		    }
 		}  else if (pontosVer[Entidade.PONTO_2]) {
 
 		    if (pontosVer[Entidade.PONTO_3]) {
 			baixo = false;
 			intersected.put(entidade, BAIXO);
+			y = dados[Entidade.Y] - height;
 			return;
 		    }
 
@@ -121,9 +128,11 @@ public class Player extends Entidade{
 		    if (isVertical) {
 			baixo = false;
 			intersected.put(entidade, BAIXO);
+			y = dados[Entidade.Y] - height;
 		    } else {
 			esquerda = false;
 			intersected.put(entidade, ESQUERDA);
+			x = dados[Entidade.X] + dados[Entidade.WIDTH];
 		    }
 		} else {
 
@@ -135,9 +144,11 @@ public class Player extends Entidade{
 		    if (isVertical) {
 			baixo = false;
 			intersected.put(entidade, BAIXO);
+			y = dados[Entidade.Y] - height;
 		    } else {
 			direita = false;
 			intersected.put(entidade, DIREITA);
+			x = dados[Entidade.X] - width;
 		    }
 		}
 
